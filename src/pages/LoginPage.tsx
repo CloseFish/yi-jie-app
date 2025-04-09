@@ -16,7 +16,7 @@ const LoginPage: React.FC = () => {
 				/>
 				<div className="relative z-10 p-12 h-full flex flex-col">
 					<div className="flex items-center gap-4">
-						<img src="https://image-resource.mastergo.com/155147695672075/155147695672088/d3db486e3da537511f0374d1b9b09afb.png" alt="翌界" className="h-16" />
+						<img src="/icons/yijie_logo.svg" alt="翌界" className="h-16" />
 						<div className="text-4xl font-bold text-blue-600">
 							翌界
 						</div>
