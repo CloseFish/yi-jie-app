@@ -80,7 +80,7 @@ const MyHomePage: React.FC = () => {
 			<div className="w-[1440px] mx-auto min-h-[1024px] p-6">
 				<Header />
 				<div className="flex">
-					<Sidebar />
+					<Sidebar currentPage="home" />
 					<main className="flex-1 p-6">
 						<div className="flex justify-between items-center mb-6">
 							<h2 className="text-xl font-medium">我的家</h2>

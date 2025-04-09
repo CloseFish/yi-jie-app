@@ -2,7 +2,11 @@ import React from 'react';
 import Button from '../ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
-const Sidebar: React.FC = () => {
+interface SidebarProps {
+	currentPage: 'home' | 'devices' | 'analysis' | 'usage' | 'history' | 'settings';
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ currentPage }) => {
 	return (
 		<aside className="w-72 bg-[#e0ebe0] p-6">
 			<div className="flex flex-col items-center mb-8">
@@ -16,27 +20,51 @@ const Sidebar: React.FC = () => {
 				</div>
 			</div>
 			<nav className="space-y-6">
-				<Button variant="ghost" className="w-full justify-start text-blue-400 text-lg py-6">
+				<Button
+					variant="ghost"
+					className={`w-full justify-start text-lg py-6 ${currentPage === 'home' ? 'text-blue-400' : 'text-gray-600'
+						}`}
+				>
 					<i className="fas fa-home mr-3 text-lg"></i>
 					我的家
 				</Button>
-				<Button variant="ghost" className="w-full justify-start text-gray-600 text-lg py-4">
+				<Button
+					variant="ghost"
+					className={`w-full justify-start text-lg py-4 ${currentPage === 'devices' ? 'text-blue-400' : 'text-gray-600'
+						}`}
+				>
 					<i className="fas fa-cog mr-3 text-lg"></i>
 					设备
 				</Button>
-				<Button variant="ghost" className="w-full justify-start text-gray-600 text-lg py-4">
+				<Button
+					variant="ghost"
+					className={`w-full justify-start text-lg py-4 ${currentPage === 'analysis' ? 'text-blue-400' : 'text-gray-600'
+						}`}
+				>
 					<i className="fas fa-chart-line mr-3 text-lg"></i>
 					智能分析
 				</Button>
-				<Button variant="ghost" className="w-full justify-start text-gray-600 text-lg py-4">
+				<Button
+					variant="ghost"
+					className={`w-full justify-start text-lg py-4 ${currentPage === 'usage' ? 'text-blue-400' : 'text-gray-600'
+						}`}
+				>
 					<i className="fas fa-database mr-3 text-lg"></i>
 					使用数据
 				</Button>
-				<Button variant="ghost" className="w-full justify-start text-gray-600 text-lg py-4">
+				<Button
+					variant="ghost"
+					className={`w-full justify-start text-lg py-4 ${currentPage === 'history' ? 'text-blue-400' : 'text-gray-600'
+						}`}
+				>
 					<i className="fas fa-history mr-3 text-lg"></i>
 					历史数据
 				</Button>
-				<Button variant="ghost" className="w-full justify-start text-gray-600 text-lg py-4">
+				<Button
+					variant="ghost"
+					className={`w-full justify-start text-lg py-4 ${currentPage === 'settings' ? 'text-blue-400' : 'text-gray-600'
+						}`}
+				>
 					<i className="fas fa-cog mr-3 text-lg"></i>
 					设置
 				</Button>
