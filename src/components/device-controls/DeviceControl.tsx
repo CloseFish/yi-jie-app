@@ -1,29 +1,53 @@
-import React from 'react';
-import Button from '../ui/button';
-import { Switch } from "@/components/ui/switch";
+import React, { forwardRef, useRef } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Switch } from '@/components/ui/switch'; // 假设这个 Switch 是你项目中已有的开关组件
 
 interface DeviceControlProps {
-	icon: string;
+	icon: any; // 可以根据具体情况细化类型
 	name: string;
 	isChecked: boolean;
 	onToggle: () => void;
 	onClick: () => void;
 }
 
-const DeviceControl: React.FC<DeviceControlProps> = ({ icon, name, isChecked, onToggle, onClick }) => {
+const DeviceControl = forwardRef<HTMLDivElement, DeviceControlProps>((props, ref) => {
+	const switchRef = useRef<HTMLDivElement>(null);
+
+	const handleClick = (e: React.MouseEvent) => {
+		if (switchRef.current && switchRef.current.contains(e.target as Node)) {
+			// 点击在开关上，只切换状态
+			props.onToggle();
+		} else {
+			// 点击在其他区域，打开对应遥控
+			props.onClick();
+		}
+	};
+
 	return (
-		<div className="relative">
-			<Button variant="ghost" className="!rounded-button w-full bg-[#c2dbc2] p-8" onClick={onClick}>
-				<div className="flex justify-between items-center w-full">
-					<div className="flex items-center">
-						<i className={`fas ${icon} text-[#2d5a27] mr-4 text-2xl`}></i>
-						<span className="text-lg">{name}</span>
-					</div>
-					<Switch checked={isChecked} onChange={onToggle} className="data-[state=checked]:bg-[#2d5a27]" />
+		<div
+			ref={ref}
+			onClick={handleClick}
+			className="bg-[#c2dbc2] p-4 rounded-lg flex items-center justify-between cursor-pointer"
+		>
+			<div className="flex items-center gap-3">
+				<div className="w-10 h-10 rounded-full bg-[#F6EBE1] flex items-center justify-center text-[#B07C5B]">
+					<FontAwesomeIcon icon={props.icon} />
 				</div>
-			</Button>
+				<div>
+					<div className="font-medium">{props.name}</div>
+					<div className="text-xs text-gray-500">
+						{props.isChecked ? '已开启' : '已关闭'}
+					</div>
+				</div>
+			</div>
+			<div ref={switchRef}>
+				<Switch
+					checked={props.isChecked}
+					onCheckedChange={props.onToggle}
+				/>
+			</div>
 		</div>
 	);
-};
+});
 
 export default DeviceControl;

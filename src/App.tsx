@@ -6,7 +6,7 @@ import DevicePage from './pages/DevicePage';
 const App: React.FC = () => {
 	return (
 		<div>
-			<DevicePage />
+			<MyHomePage />
 		</div>
 	);
 };

@@ -1,11 +1,13 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+// 导入具体的图标
+import { faTv, faBox, faLightbulb, faWifi, faThermometerHalf } from '@fortawesome/free-solid-svg-icons';
 
 import Header from '../components/shared/Header';
 import Sidebar from '../components/shared/Sidebar';
@@ -25,7 +27,7 @@ const MyHomePage: React.FC = () => {
 	const [isLightModalOpen, setIsLightModalOpen] = useState(false);
 	const [isThermostatModalOpen, setIsThermostatModalOpen] = useState(false);
 
-	const cameraImage = 'https://ai-public.mastergo.com/ai/img_res/659958a136a4b6404f1c00fe3d6406fa.jpg';
+	const cameraImage = 'https://ai-public.mastergo.com/ai/img_res/659958a136a4b6404f1c00fe3d6406fa.jpg ';
 
 	const pieChartData = [
 		{ value: 16, name: '餐厅', itemStyle: { color: '#FF6B6B' } },
@@ -37,6 +39,41 @@ const MyHomePage: React.FC = () => {
 
 	const barChartXData = ['周一', '周二', '周三', '周四', '周五'];
 	const barChartYData = [320, 280, 250, 220, 190];
+
+	// 存储设备状态
+	const [devices, setDevices] = useState<{
+		[key: string]: boolean;
+	}>(() => {
+		const storedDevices = localStorage.getItem('devices');
+		try {
+			return storedDevices ? JSON.parse(storedDevices) : {
+				TV: false,
+				Fridge: false,
+				Light: false,
+				Wifi: false,
+				Thermostat: false,
+			};
+		} catch (error) {
+			console.error('Error parsing stored devices:', error);
+			return {
+				TV: false,
+				Fridge: false,
+				Light: false,
+				Wifi: false,
+				Thermostat: false,
+			};
+		}
+	});
+
+	const toggleDevice = (deviceName: string) => {
+		const updatedDevices = { ...devices, [deviceName]: !devices[deviceName] };
+		setDevices(updatedDevices);
+		try {
+			localStorage.setItem('devices', JSON.stringify(updatedDevices));
+		} catch (error) {
+			console.error('Error saving devices:', error);
+		}
+	};
 
 	return (
 		<div className="min-h-screen bg-[#f0f5f0] text-gray-800">
@@ -92,7 +129,7 @@ const MyHomePage: React.FC = () => {
 									</SwiperSlide>
 									<SwiperSlide>
 										<div className="relative">
-											<img src="https://ai-public.mastergo.com/ai/img_res/5b5d06e9c437a03fd0963b4fb22ffd03.jpg" alt="Camera Feed 2" className="w-full h-[350px] object-cover" />
+											<img src="https://ai-public.mastergo.com/ai/img_res/5b5d06e9c437a03fd0963b4fb22ffd03.jpg " alt="Camera Feed 2" className="w-full h-[350px] object-cover" />
 											<div className="absolute bottom-4 left-4 bg-black/50 px-3 py-1 rounded text-sm">
 												2024/02/16 09:44AM
 											</div>
@@ -100,7 +137,7 @@ const MyHomePage: React.FC = () => {
 									</SwiperSlide>
 									<SwiperSlide>
 										<div className="relative">
-											<img src="https://ai-public.mastergo.com/ai/img_res/36d83598434f2cad9aa41e7f8b163143.jpg" alt="Camera Feed 3" className="w-full h-[350px] object-cover" />
+											<img src="https://ai-public.mastergo.com/ai/img_res/36d83598434f2cad9aa41e7f8b163143.jpg " alt="Camera Feed 3" className="w-full h-[350px] object-cover" />
 											<div className="absolute bottom-4 left-4 bg-black/50 px-3 py-1 rounded text-sm">
 												2024/02/16 09:45AM
 											</div>
@@ -155,38 +192,38 @@ const MyHomePage: React.FC = () => {
 						</div>
 						<div className="grid grid-cols-5 gap-2 mt-6">
 							<DeviceControl
-								icon="fa-tv"
+								icon={faTv} // 使用导入的图标对象
 								name="电视"
-								isChecked={false}
-								onToggle={() => { }}
+								isChecked={devices.TV}
+								onToggle={() => toggleDevice('TV')}
 								onClick={() => setIsTVModalOpen(true)}
 							/>
 							<DeviceControl
-								icon="fa-box"
+								icon={faBox} // 使用导入的图标对象
 								name="冰箱"
-								isChecked={false}
-								onToggle={() => { }}
+								isChecked={devices.Fridge}
+								onToggle={() => toggleDevice('Fridge')}
 								onClick={() => setIsFridgeModalOpen(true)}
 							/>
 							<DeviceControl
-								icon="fa-lightbulb"
+								icon={faLightbulb} // 使用导入的图标对象
 								name="电灯"
-								isChecked={true}
-								onToggle={() => { }}
+								isChecked={devices.Light}
+								onToggle={() => toggleDevice('Light')}
 								onClick={() => setIsLightModalOpen(true)}
 							/>
 							<DeviceControl
-								icon="fa-wifi"
+								icon={faWifi} // 使用导入的图标对象
 								name="Wifi"
-								isChecked={true}
-								onToggle={() => { }}
-								onClick={() => { }}
+								isChecked={devices.Wifi}
+								onToggle={() => toggleDevice('Wifi')}
+								onClick={() => setIsThermostatModalOpen(true)}
 							/>
 							<DeviceControl
-								icon="fa-thermometer-half"
+								icon={faThermometerHalf} // 使用导入的图标对象
 								name="恒温器"
-								isChecked={true}
-								onToggle={() => { }}
+								isChecked={devices.Thermostat}
+								onToggle={() => toggleDevice('Thermostat')}
 								onClick={() => setIsThermostatModalOpen(true)}
 							/>
 						</div>
