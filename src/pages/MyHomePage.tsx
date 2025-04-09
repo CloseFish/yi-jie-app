@@ -83,7 +83,7 @@ const MyHomePage: React.FC = () => {
 					<Sidebar currentPage="home" />
 					<main className="flex-1 p-6">
 						<div className="flex justify-between items-center mb-6">
-							<h2 className="text-xl font-medium">我的家</h2>
+							<h1 className="text-2xl font-bold">我的家</h1>
 							<div className="relative">
 								<button
 									onClick={() => setIsChatModalOpen(true)}
