@@ -1,24 +1,24 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import '@fortawesome/fontawesome-free/css/all.min.css';
-// 导入具体的图标
-import { faTv, faBox, faLightbulb, faWifi, faThermometerHalf } from '@fortawesome/free-solid-svg-icons';
+import React, { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import { faTv, faBox, faLightbulb, faWifi, faThermometerHalf } from "@fortawesome/free-solid-svg-icons";
 
-import Header from '../components/shared/Header';
-import Sidebar from '../components/shared/Sidebar';
-import PieChart from '../components/charts/PieChart';
-import BarChart from '../components/charts/BarChart';
-import ChatModal from '../components/modals/ChatModal';
-import DeviceControl from '../components/device-controls/DeviceControl';
-import TVModal from '../components/modals/TVModal';
-import FridgeModal from '../components/modals/FridgeModal';
-import LightModal from '../components/modals/LightModal';
-import ThermostatModal from '../components/modals/ThermostatModal';
+// 假设这些组件已经正确实现
+import Header from "../components/shared/Header";
+import Sidebar from "../components/shared/Sidebar";
+import PieChart from "../components/charts/PieChart";
+import BarChart from "../components/charts/BarChart";
+import ChatModal from "../components/modals/ChatModal";
+import DeviceControl from "../components/device-controls/DeviceControl";
+import TVModal from "../components/modals/TVModal";
+import FridgeModal from "../components/modals/FridgeModal";
+import LightModal from "../components/modals/LightModal";
+import ThermostatModal from "../components/modals/ThermostatModal";
 
 const MyHomePage: React.FC = () => {
 	const [isChatModalOpen, setIsChatModalOpen] = useState(false);
@@ -27,24 +27,23 @@ const MyHomePage: React.FC = () => {
 	const [isLightModalOpen, setIsLightModalOpen] = useState(false);
 	const [isThermostatModalOpen, setIsThermostatModalOpen] = useState(false);
 
-	const cameraImage = 'https://ai-public.mastergo.com/ai/img_res/659958a136a4b6404f1c00fe3d6406fa.jpg ';
+	const cameraImage = "https://ai-public.mastergo.com/ai/img_res/659958a136a4b6404f1c00fe3d6406fa.jpg ";
 
 	const pieChartData = [
-		{ value: 16, name: '餐厅', itemStyle: { color: '#FF6B6B' } },
-		{ value: 22, name: '工作室', itemStyle: { color: '#4DABF7' } },
-		{ value: 19, name: '卧室', itemStyle: { color: '#FFA94D' } },
-		{ value: 31, name: '客厅', itemStyle: { color: '#51CF66' } },
-		{ value: 12, name: '厨房', itemStyle: { color: '#CC5DE8' } },
+		{ value: 16, name: "餐厅", itemStyle: { color: "#FF6B6B" } },
+		{ value: 22, name: "工作室", itemStyle: { color: "#4DABF7" } },
+		{ value: 19, name: "卧室", itemStyle: { color: "#FFA94D" } },
+		{ value: 31, name: "客厅", itemStyle: { color: "#51CF66" } },
+		{ value: 12, name: "厨房", itemStyle: { color: "#CC5DE8" } },
 	];
 
-	const barChartXData = ['周一', '周二', '周三', '周四', '周五'];
+	const barChartXData = ["周一", "周二", "周三", "周四", "周五"];
 	const barChartYData = [320, 280, 250, 220, 190];
 
-	// 存储设备状态
 	const [devices, setDevices] = useState<{
 		[key: string]: boolean;
 	}>(() => {
-		const storedDevices = localStorage.getItem('devices');
+		const storedDevices = localStorage.getItem("devices");
 		try {
 			return storedDevices ? JSON.parse(storedDevices) : {
 				TV: false,
@@ -54,7 +53,7 @@ const MyHomePage: React.FC = () => {
 				Thermostat: false,
 			};
 		} catch (error) {
-			console.error('Error parsing stored devices:', error);
+			console.error("Error parsing stored devices:", error);
 			return {
 				TV: false,
 				Fridge: false,
@@ -69,11 +68,13 @@ const MyHomePage: React.FC = () => {
 		const updatedDevices = { ...devices, [deviceName]: !devices[deviceName] };
 		setDevices(updatedDevices);
 		try {
-			localStorage.setItem('devices', JSON.stringify(updatedDevices));
+			localStorage.setItem("devices", JSON.stringify(updatedDevices));
 		} catch (error) {
-			console.error('Error saving devices:', error);
+			console.error("Error saving devices:", error);
 		}
 	};
+
+	const [activeCamera, setActiveCamera] = useState("C1");
 
 	return (
 		<div className="min-h-screen bg-[#f0f5f0] text-gray-800">
@@ -101,23 +102,34 @@ const MyHomePage: React.FC = () => {
 						<div className="p-4 border-b border-gray-700 flex justify-between items-center">
 							<span>摄像头</span>
 							<div className="flex space-x-2">
-								<span className="text-blue-400">C1</span>
-								<span className="text-gray-400">C2</span>
-								<span className="text-gray-400">C3</span>
-								<span className="text-gray-400">C4</span>
+								<span className={activeCamera === "C1" ? "text-blue-400" : "text-gray-400"}>C1</span>
+								<span className={activeCamera === "C2" ? "text-blue-400" : "text-gray-400"}>C2</span>
+								<span className={activeCamera === "C3" ? "text-blue-400" : "text-gray-400"}>C3</span>
 								<i className="fas fa-ellipsis-v text-gray-400 ml-2"></i>
 							</div>
 						</div>
 						<Swiper
 							modules={[Pagination, Autoplay]}
 							pagination={{ clickable: true }}
-							autoplay={{ delay: 3000 }}
+							autoplay={{
+								delay: 3000,
+								disableOnInteraction: false // 确保手动交互后仍能自动播放
+							}}
 							loop={true}
 							className="w-full h-[350px]"
+							onSlideChange={(swiper) => {
+								const cameras = ["C1", "C2", "C3"];
+								const index = swiper.realIndex % cameras.length;
+								setActiveCamera(cameras[index]);
+							}}
 						>
 							<SwiperSlide>
 								<div className="relative">
-									<img src={cameraImage} alt="Camera Feed 1" className="w-full h-[350px] object-cover" />
+									<img
+										src={cameraImage}
+										alt="Camera Feed 1"
+										className="w-full h-[350px] object-cover"
+									/>
 									<div className="absolute bottom-4 left-4 bg-black/50 px-3 py-1 rounded text-sm">
 										2024/02/16 09:43AM
 									</div>
@@ -125,7 +137,11 @@ const MyHomePage: React.FC = () => {
 							</SwiperSlide>
 							<SwiperSlide>
 								<div className="relative">
-									<img src="https://ai-public.mastergo.com/ai/img_res/5b5d06e9c437a03fd0963b4fb22ffd03.jpg " alt="Camera Feed 2" className="w-full h-[350px] object-cover" />
+									<img
+										src="https://ai-public.mastergo.com/ai/img_res/5b5d06e9c437a03fd0963b4fb22ffd03.jpg "
+										alt="Camera Feed 2"
+										className="w-full h-[350px] object-cover"
+									/>
 									<div className="absolute bottom-4 left-4 bg-black/50 px-3 py-1 rounded text-sm">
 										2024/02/16 09:44AM
 									</div>
@@ -133,7 +149,11 @@ const MyHomePage: React.FC = () => {
 							</SwiperSlide>
 							<SwiperSlide>
 								<div className="relative">
-									<img src="https://ai-public.mastergo.com/ai/img_res/36d83598434f2cad9aa41e7f8b163143.jpg " alt="Camera Feed 3" className="w-full h-[350px] object-cover" />
+									<img
+										src="https://ai-public.mastergo.com/ai/img_res/36d83598434f2cad9aa41e7f8b163143.jpg "
+										alt="Camera Feed 3"
+										className="w-full h-[350px] object-cover"
+									/>
 									<div className="absolute bottom-4 left-4 bg-black/50 px-3 py-1 rounded text-sm">
 										2024/02/16 09:45AM
 									</div>
@@ -188,42 +208,41 @@ const MyHomePage: React.FC = () => {
 				</div>
 				<div className="grid grid-cols-5 gap-2 mt-6">
 					<DeviceControl
-						icon={faTv} // 使用导入的图标对象
+						icon={faTv}
 						name="电视"
 						isChecked={devices.TV}
-						onToggle={() => toggleDevice('TV')}
+						onToggle={() => toggleDevice("TV")}
 						onClick={() => setIsTVModalOpen(true)}
 					/>
 					<DeviceControl
-						icon={faBox} // 使用导入的图标对象
+						icon={faBox}
 						name="冰箱"
 						isChecked={devices.Fridge}
-						onToggle={() => toggleDevice('Fridge')}
+						onToggle={() => toggleDevice("Fridge")}
 						onClick={() => setIsFridgeModalOpen(true)}
 					/>
 					<DeviceControl
-						icon={faLightbulb} // 使用导入的图标对象
+						icon={faLightbulb}
 						name="电灯"
 						isChecked={devices.Light}
-						onToggle={() => toggleDevice('Light')}
+						onToggle={() => toggleDevice("Light")}
 						onClick={() => setIsLightModalOpen(true)}
 					/>
 					<DeviceControl
-						icon={faWifi} // 使用导入的图标对象
+						icon={faWifi}
 						name="Wifi"
 						isChecked={devices.Wifi}
-						onToggle={() => toggleDevice('Wifi')}
+						onToggle={() => toggleDevice("Wifi")}
 						onClick={() => null}
 					/>
 					<DeviceControl
-						icon={faThermometerHalf} // 使用导入的图标对象
+						icon={faThermometerHalf}
 						name="恒温器"
 						isChecked={devices.Thermostat}
-						onToggle={() => toggleDevice('Thermostat')}
+						onToggle={() => toggleDevice("Thermostat")}
 						onClick={() => setIsThermostatModalOpen(true)}
 					/>
 				</div>
-				{/* 渲染各个设备的模态框 */}
 				<TVModal isOpen={isTVModalOpen} onClose={() => setIsTVModalOpen(false)} />
 				<FridgeModal isOpen={isFridgeModalOpen} onClose={() => setIsFridgeModalOpen(false)} />
 				<LightModal isOpen={isLightModalOpen} onClose={() => setIsLightModalOpen(false)} />
