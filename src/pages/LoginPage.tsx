@@ -1,4 +1,3 @@
-// 代码已包含 CSS：使用 TailwindCSS , 安装 TailwindCSS 后方可看到布局样式效果
 import React from 'react';
 import Input from "@/components/ui/input";
 import Button from "@/components/ui/button";
@@ -22,7 +21,7 @@ const LoginPage: React.FC = () => {
 						</div>
 					</div>
 					<div className="flex-1 flex items-center justify-center">
-						<div className="max-w-2xl bg-gradient-to-b from-blue-200 via-white to-blue-200 p-20 rounded-[60px] shadow-xl">
+						<div className="bg-gradient-to-b from-blue-200 via-white to-blue-200 p-20 rounded-[60px] shadow-xl w-full h-full flex flex-col items-start justify-center mt-16">
 							<div className="text-[40px] font-bold text-gray-800 leading-tight">
 								每个人都是自己的
 								<br />
