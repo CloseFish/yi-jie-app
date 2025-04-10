@@ -213,7 +213,7 @@ const MyHomePage: React.FC = () => {
 						name="Wifi"
 						isChecked={devices.Wifi}
 						onToggle={() => toggleDevice('Wifi')}
-						onClick={() => setIsThermostatModalOpen(true)}
+						onClick={() => null}
 					/>
 					<DeviceControl
 						icon={faThermometerHalf} // 使用导入的图标对象
