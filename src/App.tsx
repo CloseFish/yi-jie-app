@@ -7,7 +7,7 @@ import Sidebar from './components/shared/Sidebar';
 import Header from './components/shared/Header';
 
 const App: React.FC = () => {
-	const [currentPage, setCurrentPage] = useState<'myhome' | 'devices' | 'login'>('myhome');
+	const [currentPage, setCurrentPage] = useState<'home' | 'devices' | 'analysis' | 'usage' | 'history' | 'settings' | 'login'>('home');
 
 	return (
 		<div className="min-h-screen bg-[#f0f5f0] text-gray-800">
@@ -16,9 +16,10 @@ const App: React.FC = () => {
 				<div className="flex">
 					{currentPage !== 'login' && <Sidebar currentPage={currentPage} setCurrentPage={setCurrentPage} />}
 					<main className="flex-1 p-6">
-						{currentPage === 'myhome' && <MyHomePage />}
+						{currentPage === 'home' && <MyHomePage />}
 						{currentPage === 'devices' && <DevicePage />}
 						{currentPage === 'login' && <LoginPage />}
+						{/* 其他页面 */}
 					</main>
 				</div>
 			</div>

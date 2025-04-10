@@ -3,8 +3,8 @@ import React from 'react';
 import Button from '../ui/button';
 
 interface HeaderProps {
-	currentPage: 'myhome' | 'devices' | 'login';
-	setCurrentPage: React.Dispatch<React.SetStateAction<'myhome' | 'devices' | 'login'>>;
+	currentPage: 'home' | 'devices' | 'analysis' | 'usage' | 'history' | 'settings' | 'login';
+	setCurrentPage: React.Dispatch<React.SetStateAction<'home' | 'devices' | 'analysis' | 'usage' | 'history' | 'settings' | 'login'>>;
 }
 
 const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
@@ -15,8 +15,8 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
 				<div className="flex space-x-4">
 					<Button
 						variant="ghost"
-						className={`text-lg py-4 ${currentPage === 'myhome' ? 'text-blue-400' : 'text-gray-600'}`}
-						onClick={() => setCurrentPage('myhome')}
+						className={`text-lg py-4 ${currentPage === 'home' ? 'text-blue-400' : 'text-gray-600'}`}
+						onClick={() => setCurrentPage('home')}
 					>
 						我的家
 					</Button>
