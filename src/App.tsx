@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import MyHomePage from './pages/MyHomePage';
 import DevicePage from './pages/DevicePage';
 import LoginPage from './pages/LoginPage';
+import AnalysisPage from './pages/AnalysisPage';
 import Sidebar from './components/shared/Sidebar';
 import Header from './components/shared/Header';
 
@@ -19,6 +20,7 @@ const App: React.FC = () => {
 						{currentPage === 'home' && <MyHomePage />}
 						{currentPage === 'devices' && <DevicePage />}
 						{currentPage === 'login' && <LoginPage />}
+						{currentPage === 'analysis' && <AnalysisPage />}
 						{/* 其他页面 */}
 					</main>
 				</div>

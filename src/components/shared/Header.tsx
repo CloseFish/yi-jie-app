@@ -29,6 +29,13 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
 					</Button>
 					<Button
 						variant="ghost"
+						className={`text-lg py-4 ${currentPage === 'analysis' ? 'text-blue-400' : 'text-gray-600'}`}
+						onClick={() => setCurrentPage('analysis')}
+					>
+						智能分析
+					</Button>
+					<Button
+						variant="ghost"
 						className={`text-lg py-4 ${currentPage === 'login' ? 'text-blue-400' : 'text-gray-600'}`}
 						onClick={() => setCurrentPage('login')}
 					>

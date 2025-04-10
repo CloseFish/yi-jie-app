@@ -1,29 +1,39 @@
 import React from 'react';
 
+// 扩展 variant 类型，添加 secondary
 interface ButtonProps {
-  variant?: 'ghost' | 'default' | 'outline'; // 添加 'outline' 到 variant 类型定义
+  variant?: 'ghost' | 'default' | 'outline' | 'secondary';
   className?: string;
   onClick?: () => void;
   children: React.ReactNode;
   style?: React.CSSProperties;
   onMouseDown?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  disabled?: boolean; // 添加 disabled 属性
+  disabled?: boolean;
+  size?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ variant = 'default', className, onClick, children, style, onMouseDown, disabled = false }) => {
+const Button: React.FC<ButtonProps> = ({ variant = 'default', className, onClick, children, style, onMouseDown, disabled = false, size }) => {
   const variantClass = variant === 'ghost'
     ? 'bg-transparent'
     : variant === 'outline'
       ? 'border border-gray-300 bg-transparent text-gray-700 hover:bg-gray-100'
-      : 'bg-blue-500 text-white';
+      : variant === 'secondary'
+        ? 'bg-green-500 text-white' // 定义 secondary 变体的样式
+        : 'bg-blue-500 text-white';
+
+  const sizeClass = size === 'small'
+    ? 'text-sm px-2 py-1'
+    : size === 'large'
+      ? 'text-lg px-4 py-2'
+      : '';
 
   return (
     <button
-      className={`${variantClass} ${className}`}
+      className={`${variantClass} ${sizeClass} ${className}`}
       onClick={onClick}
       style={style}
       onMouseDown={onMouseDown}
-      disabled={disabled} // 添加 disabled 属性
+      disabled={disabled}
     >
       {children}
     </button>
