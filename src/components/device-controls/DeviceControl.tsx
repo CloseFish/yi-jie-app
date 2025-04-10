@@ -30,7 +30,7 @@ const DeviceControl = forwardRef<HTMLDivElement, DeviceControlProps>((props, ref
 			className="bg-[#c2dbc2] p-4 rounded-lg flex items-center justify-between cursor-pointer"
 		>
 			<div className="flex items-center gap-3">
-				<div className="w-10 h-10 rounded-full bg-[#F6EBE1] flex items-center justify-center text-[#B07C5B]">
+				<div className="w-10 h-10 rounded-full bg-[#C2DBC2] flex items-center justify-center text-[#2D5A27]">
 					<FontAwesomeIcon icon={props.icon} />
 				</div>
 				<div>

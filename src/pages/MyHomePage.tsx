@@ -43,7 +43,7 @@ const MyHomePage: React.FC = () => {
 	const [devices, setDevices] = useState<{
 		[key: string]: boolean;
 	}>(() => {
-		const storedDevices = localStorage.getItem("devices");
+		const storedDevices = localStorage.getItem("devicesStatus");
 		try {
 			return storedDevices ? JSON.parse(storedDevices) : {
 				TV: false,
@@ -68,7 +68,7 @@ const MyHomePage: React.FC = () => {
 		const updatedDevices = { ...devices, [deviceName]: !devices[deviceName] };
 		setDevices(updatedDevices);
 		try {
-			localStorage.setItem("devices", JSON.stringify(updatedDevices));
+			localStorage.setItem("devicesStatus", JSON.stringify(updatedDevices));
 		} catch (error) {
 			console.error("Error saving devices:", error);
 		}
