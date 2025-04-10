@@ -3,8 +3,8 @@ import React from 'react';
 import Button from '../ui/button';
 
 interface HeaderProps {
-	currentPage: 'home' | 'devices' | 'analysis' | 'usage' | 'history' | 'settings' | 'login';
-	setCurrentPage: React.Dispatch<React.SetStateAction<'home' | 'devices' | 'analysis' | 'usage' | 'history' | 'settings' | 'login'>>;
+	currentPage: 'home' | 'devices' | 'analysis' | 'history' | 'settings' | 'login';
+	setCurrentPage: React.Dispatch<React.SetStateAction<'home' | 'devices' | 'analysis' | 'history' | 'settings' | 'login'>>;
 }
 
 const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {

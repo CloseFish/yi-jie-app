@@ -4,12 +4,12 @@ import Button from '../ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 interface SidebarProps {
-	currentPage: 'home' | 'devices' | 'analysis' | 'usage' | 'history' | 'settings' | 'login';
-	setCurrentPage: React.Dispatch<React.SetStateAction<'home' | 'devices' | 'analysis' | 'usage' | 'history' | 'settings' | 'login'>>;
+	currentPage: 'home' | 'devices' | 'analysis' | 'history' | 'settings' | 'login';
+	setCurrentPage: React.Dispatch<React.SetStateAction<'home' | 'devices' | 'analysis' | 'history' | 'settings' | 'login'>>;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ currentPage, setCurrentPage }) => {
-	const handlePageChange = (page: 'home' | 'devices' | 'analysis' | 'usage' | 'history' | 'settings' | 'login') => {
+	const handlePageChange = (page: 'home' | 'devices' | 'analysis' | 'history' | 'settings' | 'login') => {
 		// 只有在页面已实现时才切换页面
 		if (['home', 'devices'].includes(page)) {
 			setCurrentPage(page);
@@ -31,7 +31,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, setCurrentPage }) => {
 			<nav className="space-y-6">
 				<Button
 					variant="ghost"
-					className={`w-full justify-start text-lg py-6 ${currentPage === 'home' ? 'text-blue-400' : 'text-gray-600'}`}
+					className={`w-full text-left text-lg py-6 ${currentPage === 'home' ? 'text-blue-400' : 'text-gray-600'}`}
 					onClick={() => handlePageChange('home')}
 				>
 					<i className="fas fa-home mr-3 text-lg"></i>
@@ -39,7 +39,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, setCurrentPage }) => {
 				</Button>
 				<Button
 					variant="ghost"
-					className={`w-full justify-start text-lg py-4 ${currentPage === 'devices' ? 'text-blue-400' : 'text-gray-600'}`}
+					className={`w-full text-left text-lg py-4 ${currentPage === 'devices' ? 'text-blue-400' : 'text-gray-600'}`}
 					onClick={() => handlePageChange('devices')}
 				>
 					<i className="fas fa-cog mr-3 text-lg"></i>
@@ -47,7 +47,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, setCurrentPage }) => {
 				</Button>
 				<Button
 					variant="ghost"
-					className={`w-full justify-start text-lg py-4 ${currentPage === 'analysis' ? 'text-blue-400' : 'text-gray-600'}`}
+					className={`w-full text-left text-lg py-4 ${currentPage === 'analysis' ? 'text-blue-400' : 'text-gray-600'}`}
 					onClick={() => setCurrentPage('analysis')}
 				>
 					<i className="fas fa-chart-line mr-3 text-lg"></i>
@@ -55,15 +55,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, setCurrentPage }) => {
 				</Button>
 				<Button
 					variant="ghost"
-					className={`w-full justify-start text-lg py-4 ${currentPage === 'usage' ? 'text-blue-400' : 'text-gray-600'}`}
-					onClick={() => setCurrentPage('usage')}
-				>
-					<i className="fas fa-database mr-3 text-lg"></i>
-					使用数据
-				</Button>
-				<Button
-					variant="ghost"
-					className={`w-full justify-start text-lg py-4 ${currentPage === 'history' ? 'text-blue-400' : 'text-gray-600'}`}
+					className={`w-full text-left text-lg py-4 ${currentPage === 'history' ? 'text-blue-400' : 'text-gray-600'}`}
 					onClick={() => setCurrentPage('history')}
 				>
 					<i className="fas fa-history mr-3 text-lg"></i>
@@ -71,7 +63,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, setCurrentPage }) => {
 				</Button>
 				<Button
 					variant="ghost"
-					className={`w-full justify-start text-lg py-4 ${currentPage === 'settings' ? 'text-blue-400' : 'text-gray-600'}`}
+					className={`w-full text-left text-lg py-4 ${currentPage === 'settings' ? 'text-blue-400' : 'text-gray-600'}`}
 					onClick={() => setCurrentPage('settings')}
 				>
 					<i className="fas fa-cog mr-3 text-lg"></i>

@@ -7,7 +7,7 @@ import Sidebar from './components/shared/Sidebar';
 import Header from './components/shared/Header';
 
 const App: React.FC = () => {
-	const [currentPage, setCurrentPage] = useState<'home' | 'devices' | 'analysis' | 'usage' | 'history' | 'settings' | 'login'>('home');
+	const [currentPage, setCurrentPage] = useState<'home' | 'devices' | 'analysis' | 'history' | 'settings' | 'login'>('home');
 
 	return (
 		<div className="min-h-screen bg-[#f0f5f0] text-gray-800">
