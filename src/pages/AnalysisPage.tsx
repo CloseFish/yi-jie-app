@@ -1,14 +1,25 @@
 // 代码已包含 CSS：使用 TailwindCSS , 安装 TailwindCSS 后方可看到布局样式效果
 import React from 'react';
 import * as echarts from 'echarts';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import Button from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Progress from "@/components/ui/progess";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
+// 修改 SelectTriggerProps 接口，添加 onClick 属性
+interface SelectTriggerProps {
+	className?: string;
+	children?: React.ReactNode;
+	onClick?: () => void;
+}
+
 const App: React.FC = () => {
 	const chartRef = useRef<HTMLDivElement>(null);
+	const [selectedValue, setSelectedValue] = useState('thisMonth'); // 用于存储选中的值
+	const [isOpen, setIsOpen] = useState(false); // 用于控制下拉内容的显示状态
+
 	useEffect(() => {
 		if (chartRef.current) {
 			const myChart = echarts.init(chartRef.current);
@@ -99,6 +110,12 @@ const App: React.FC = () => {
 			myChart.setOption(option);
 		}
 	}, []);
+
+	const handleItemClick = (value: string) => {
+		setSelectedValue(value);
+		setIsOpen(false);
+	};
+
 	return (
 		<div className="min-h-screen bg-slate-900 text-white">
 			<div className="max-w-[1440px] mx-auto">
@@ -110,14 +127,14 @@ const App: React.FC = () => {
 							<Card className="bg-[#C2DBC2] p-6 border-none">
 								<div className="flex items-center justify-between mb-6">
 									<h3 className="text-xl font-semibold">能源消耗</h3>
-									<Select defaultValue="thisMonth">
-										<SelectTrigger className="w-32 bg-[#E0EBE0] text-[#1F2937]">
-											<SelectValue />
+									<Select defaultValue={selectedValue}>
+										<SelectTrigger className="w-32 bg-[#E0EBE0] text-[#1F2937]" onClick={() => setIsOpen(!isOpen)}>
+											<SelectValue>{selectedValue}</SelectValue>
 										</SelectTrigger>
-										<SelectContent>
-											<SelectItem value="thisMonth">这个月</SelectItem>
-											<SelectItem value="lastMonth">上个月</SelectItem>
-											<SelectItem value="lastThreeMonths">近三个月</SelectItem>
+										<SelectContent isOpen={isOpen}>
+											<SelectItem value="thisMonth" onClick={handleItemClick}>这个月</SelectItem>
+											<SelectItem value="lastMonth" onClick={handleItemClick}>上个月</SelectItem>
+											<SelectItem value="lastThreeMonths" onClick={handleItemClick}>近三个月</SelectItem>
 										</SelectContent>
 									</Select>
 								</div>
@@ -177,13 +194,13 @@ const App: React.FC = () => {
 								<Card className="p-4 bg-[#C2DBC2] border-none">
 									<div className="flex items-center justify-between mb-4">
 										<h3>摄像头</h3>
-										<Select defaultValue="thisMonth">
-											<SelectTrigger className="w-32 bg-[#E0EBE0] text-[#1F2937]">
-												<SelectValue />
+										<Select defaultValue={selectedValue}>
+											<SelectTrigger className="w-32 bg-[#E0EBE0] text-[#1F2937]" onClick={() => setIsOpen(!isOpen)}>
+												<SelectValue>{selectedValue}</SelectValue>
 											</SelectTrigger>
-											<SelectContent>
-												<SelectItem value="thisMonth">这个月</SelectItem>
-												<SelectItem value="lastMonth">上个月</SelectItem>
+											<SelectContent isOpen={isOpen}>
+												<SelectItem value="thisMonth" onClick={handleItemClick}>这个月</SelectItem>
+												<SelectItem value="lastMonth" onClick={handleItemClick}>上个月</SelectItem>
 											</SelectContent>
 										</Select>
 									</div>
@@ -206,13 +223,13 @@ const App: React.FC = () => {
 								<Card className="p-4 bg-[#C2DBC2] border-none">
 									<div className="flex items-center justify-between mb-4">
 										<h3>水量</h3>
-										<Select defaultValue="thisMonth">
-											<SelectTrigger className="w-32 bg-[#E0EBE0] text-[#1F2937]">
-												<SelectValue />
+										<Select defaultValue={selectedValue}>
+											<SelectTrigger className="w-32 bg-[#E0EBE0] text-[#1F2937]" onClick={() => setIsOpen(!isOpen)}>
+												<SelectValue>{selectedValue}</SelectValue>
 											</SelectTrigger>
-											<SelectContent>
-												<SelectItem value="thisMonth">这个月</SelectItem>
-												<SelectItem value="lastMonth">上个月</SelectItem>
+											<SelectContent isOpen={isOpen}>
+												<SelectItem value="thisMonth" onClick={handleItemClick}>这个月</SelectItem>
+												<SelectItem value="lastMonth" onClick={handleItemClick}>上个月</SelectItem>
 											</SelectContent>
 										</Select>
 									</div>
@@ -235,13 +252,13 @@ const App: React.FC = () => {
 								<Card className="p-4 bg-[#C2DBC2] border-none">
 									<div className="flex items-center justify-between mb-4">
 										<h3>大灯</h3>
-										<Select defaultValue="thisMonth">
-											<SelectTrigger className="w-32 bg-[#E0EBE0] text-[#1F2937]">
-												<SelectValue />
+										<Select defaultValue={selectedValue}>
+											<SelectTrigger className="w-32 bg-[#E0EBE0] text-[#1F2937]" onClick={() => setIsOpen(!isOpen)}>
+												<SelectValue>{selectedValue}</SelectValue>
 											</SelectTrigger>
-											<SelectContent>
-												<SelectItem value="thisMonth">这个月</SelectItem>
-												<SelectItem value="lastMonth">上个月</SelectItem>
+											<SelectContent isOpen={isOpen}>
+												<SelectItem value="thisMonth" onClick={handleItemClick}>这个月</SelectItem>
+												<SelectItem value="lastMonth" onClick={handleItemClick}>上个月</SelectItem>
 											</SelectContent>
 										</Select>
 									</div>
@@ -264,13 +281,13 @@ const App: React.FC = () => {
 								<Card className="p-4 bg-[#C2DBC2] border-none">
 									<div className="flex items-center justify-between mb-4">
 										<h3>插座</h3>
-										<Select defaultValue="thisMonth">
-											<SelectTrigger className="w-32 bg-[#E0EBE0] text-[#1F2937]">
-												<SelectValue />
+										<Select defaultValue={selectedValue}>
+											<SelectTrigger className="w-32 bg-[#E0EBE0] text-[#1F2937]" onClick={() => setIsOpen(!isOpen)}>
+												<SelectValue>{selectedValue}</SelectValue>
 											</SelectTrigger>
-											<SelectContent>
-												<SelectItem value="thisMonth">这个月</SelectItem>
-												<SelectItem value="lastMonth">上个月</SelectItem>
+											<SelectContent isOpen={isOpen}>
+												<SelectItem value="thisMonth" onClick={handleItemClick}>这个月</SelectItem>
+												<SelectItem value="lastMonth" onClick={handleItemClick}>上个月</SelectItem>
 											</SelectContent>
 										</Select>
 									</div>
@@ -298,4 +315,5 @@ const App: React.FC = () => {
 		</div>
 	);
 };
-export default App
+
+export default App;
