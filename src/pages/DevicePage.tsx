@@ -21,6 +21,7 @@ import TVModal from "../components/modals/TVModal";
 import FridgeModal from "../components/modals/FridgeModal";
 import LightModal from "../components/modals/LightModal";
 import ThermostatModal from "../components/modals/ThermostatModal";
+import MusicPlayerModal from "../components/modals/MusicPlayerModal"; // 引入智能音箱模态框组件
 
 const DevicePage: React.FC = () => {
 	// 从 localStorage 中读取设备状态
@@ -46,7 +47,7 @@ const DevicePage: React.FC = () => {
 	const [isFridgeModalOpen, setIsFridgeModalOpen] = useState(false);
 	const [isLightModalOpen, setIsLightModalOpen] = useState(false);
 	const [isThermostatModalOpen, setIsThermostatModalOpen] = useState(false);
-
+	const [isSpeakerModalOpen, setIsSpeakerModalOpen] = useState(false); // 添加智能音箱模态框显示状态
 
 	// 保存设备状态到 localStorage
 	useEffect(() => {
@@ -76,7 +77,7 @@ const DevicePage: React.FC = () => {
 						name="恒温器"
 						isChecked={devices.Thermostat}
 						onToggle={() => toggleDevice("Thermostat")}
-						onClick={() => setIsThermostatModalOpen(true)} // 修正为打开恒温器模态框
+						onClick={() => setIsThermostatModalOpen(true)}
 					/>
 					<DeviceControl
 						icon={faTv}
@@ -97,7 +98,7 @@ const DevicePage: React.FC = () => {
 						name="智能音响"
 						isChecked={devices.Speaker}
 						onToggle={() => toggleDevice("Speaker")}
-						onClick={() => console.log("Open Speaker Modal")}
+						onClick={() => setIsSpeakerModalOpen(true)} // 点击打开智能音箱模态框
 					/>
 					<DeviceControl
 						icon={faBox}
@@ -171,6 +172,12 @@ const DevicePage: React.FC = () => {
 				onClose={() => setIsThermostatModalOpen(false)}
 				isThermostatOn={devices.Thermostat}
 				toggleThermostat={() => toggleDevice("Thermostat")}
+			/>
+			<MusicPlayerModal
+				showMusicDialog={isSpeakerModalOpen}
+				setShowMusicDialog={setIsSpeakerModalOpen}
+				isSpeakerOn={devices.Speaker}
+				toggleSpeaker={() => toggleDevice("Speaker")}
 			/>
 		</div>
 	);
