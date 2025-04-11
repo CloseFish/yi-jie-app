@@ -1,4 +1,3 @@
-// DevicePage.tsx
 "use client";
 import React, { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
@@ -17,6 +16,7 @@ import {
 	faLock,
 } from "@fortawesome/free-solid-svg-icons";
 import DeviceControl from "@/components/device-controls/DeviceControl"; // 引入 DeviceControl 组件
+import TVModal from "../components/modals/TVModal"; // 引入 TVModal 组件
 
 const DevicePage: React.FC = () => {
 	// 从 localStorage 中读取设备状态
@@ -38,6 +38,7 @@ const DevicePage: React.FC = () => {
 		};
 
 	const [devices, setDevices] = useState(initialDevices);
+	const [isTVModalOpen, setIsTVModalOpen] = useState(false); // 管理电视模态框的显示状态
 
 	// 保存设备状态到 localStorage
 	useEffect(() => {
@@ -71,7 +72,7 @@ const DevicePage: React.FC = () => {
 						name="电视"
 						isChecked={devices.TV}
 						onToggle={() => toggleDevice("TV")}
-						onClick={() => console.log("Open TV Modal")}
+						onClick={() => setIsTVModalOpen(true)} // 点击电视设备时打开模态框
 					/>
 					<DeviceControl
 						icon={faLightbulb}
@@ -138,6 +139,7 @@ const DevicePage: React.FC = () => {
 					/>
 				</div>
 			</div>
+			<TVModal isOpen={isTVModalOpen} onClose={() => setIsTVModalOpen(false)} /> {/* 渲染电视模态框 */}
 		</div>
 	);
 };
