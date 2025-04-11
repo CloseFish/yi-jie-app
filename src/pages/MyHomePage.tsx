@@ -243,7 +243,11 @@ const MyHomePage: React.FC = () => {
 						onClick={() => setIsThermostatModalOpen(true)}
 					/>
 				</div>
-				<TVModal isOpen={isTVModalOpen} onClose={() => setIsTVModalOpen(false)} />
+				<TVModal
+					isOpen={isTVModalOpen}
+					onClose={() => setIsTVModalOpen(false)}
+					toggleTV={() => toggleDevice("TV")} // 传递控制电视开关的函数
+				/>
 				<FridgeModal isOpen={isFridgeModalOpen} onClose={() => setIsFridgeModalOpen(false)} />
 				<LightModal isOpen={isLightModalOpen} onClose={() => setIsLightModalOpen(false)} />
 				<ThermostatModal isOpen={isThermostatModalOpen} onClose={() => setIsThermostatModalOpen(false)} />

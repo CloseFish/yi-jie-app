@@ -29,7 +29,7 @@ const useVolumeAndBrightness = () => {
 };
 
 // 自定义钩子，用于实现背景虚化和禁用除指定元素外的控件
-const useBackdropBlurAndDisableOutside = (isOpen: boolean) => {
+const useBackdropBlurAndDisableOutside = (isOpen: boolean, onClose: () => void) => {
 	const modalRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -37,6 +37,7 @@ const useBackdropBlurAndDisableOutside = (isOpen: boolean) => {
 			if (isOpen && modalRef.current && !modalRef.current.contains(event.target as Node)) {
 				event.preventDefault();
 				event.stopPropagation();
+				onClose(); // 点击模态框外时调用关闭模态框的函数
 			}
 		};
 
@@ -47,7 +48,7 @@ const useBackdropBlurAndDisableOutside = (isOpen: boolean) => {
 		return () => {
 			document.removeEventListener('click', handleClickOutside, true);
 		};
-	}, [isOpen]);
+	}, [isOpen, onClose]);
 
 	const backdrop = isOpen && (
 		<div className="fixed inset-0 bg-black opacity-50 z-40 backdrop-blur-sm" />
@@ -59,11 +60,12 @@ const useBackdropBlurAndDisableOutside = (isOpen: boolean) => {
 interface TVModalProps {
 	isOpen: boolean;
 	onClose: () => void;
+	toggleTV: () => void; // 新增控制电视开关的函数
 }
 
-const TVModal: React.FC<TVModalProps> = ({ isOpen, onClose }) => {
+const TVModal: React.FC<TVModalProps> = ({ isOpen, onClose, toggleTV }) => {
 	const { volumeValue, setVolumeValue, brightnessValue, setBrightnessValue } = useVolumeAndBrightness();
-	const { modalRef, backdrop } = useBackdropBlurAndDisableOutside(isOpen);
+	const { modalRef, backdrop } = useBackdropBlurAndDisableOutside(isOpen, onClose);
 
 	if (!isOpen) return null;
 
@@ -77,16 +79,19 @@ const TVModal: React.FC<TVModalProps> = ({ isOpen, onClose }) => {
 			>
 				<div className="flex justify-between items-center mb-6">
 					<span className="text-lg font-medium">电视遥控器</span>
-					<Button className="w-12 h-12 rounded-full bg-red-500 hover:bg-red-600 text-white" onClick={onClose}>
+					<Button className="w-12 h-12 rounded-full bg-red-500 hover:bg-red-600 text-white" onClick={() => {
+						toggleTV(); // 调用传递进来的函数控制电视开关
+						//onClose(); // 关闭模态框
+					}}>
 						<i className="fas fa-power-off"></i>
 					</Button>
 				</div>
 				<div className="flex flex-col items-center gap-6">
 					<div className="flex justify-between w-full mb-4">
-						<Button className="h-10 px-6 bg-[#C2DBC2] hover:bg-[#C2DBC2]/90 !rounded-button">
+						<Button className="h-10 px-6 bg-[#C2DBC2] hover:bg-[#C2DBC2]/90!rounded-button">
 							<i className="fas fa-cog text-[#2D5A27] text-xl"></i>
 						</Button>
-						<Button className="h-10 px-6 bg-[#C2DBC2] hover:bg-[#C2DBC2]/90 !rounded-button">
+						<Button className="h-10 px-6 bg-[#C2DBC2] hover:bg-[#C2DBC2]/90!rounded-button">
 							<i className="fas fa-bars text-[#2D5A27] text-xl"></i>
 						</Button>
 					</div>

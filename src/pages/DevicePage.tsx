@@ -72,7 +72,7 @@ const DevicePage: React.FC = () => {
 						name="恒温器"
 						isChecked={devices.Thermostat}
 						onToggle={() => toggleDevice("Thermostat")}
-						onClick={() => setIsThermostatModalOpen(true)}
+						onClick={() => setIsTVModalOpen(true)}
 					/>
 					<DeviceControl
 						icon={faTv}
@@ -146,7 +146,11 @@ const DevicePage: React.FC = () => {
 					/>
 				</div>
 			</div>
-			<TVModal isOpen={isTVModalOpen} onClose={() => setIsTVModalOpen(false)} />
+			<TVModal
+				isOpen={isTVModalOpen}
+				onClose={() => setIsTVModalOpen(false)}
+				toggleTV={() => toggleDevice("TV")} // 传递控制电视开关的函数
+			/>
 			<FridgeModal isOpen={isFridgeModalOpen} onClose={() => setIsFridgeModalOpen(false)} />
 			<LightModal isOpen={isLightModalOpen} onClose={() => setIsLightModalOpen(false)} />
 			<ThermostatModal isOpen={isThermostatModalOpen} onClose={() => setIsThermostatModalOpen(false)} />
