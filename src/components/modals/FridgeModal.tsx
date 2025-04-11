@@ -41,7 +41,7 @@ const FridgeModal: React.FC<FridgeModalProps> = ({ isOpen, onClose, toggleFridge
 							className="w-12 h-12 rounded-full bg-red-500 hover:bg-red-600 text-white"
 							onClick={() => {
 								toggleFridge(); // 调用传递进来的函数控制冰箱开关
-								onClose(); // 关闭模态框
+							//	onClose(); // 关闭模态框
 							}}
 						>
 							<i className="fas fa-power-off"></i>
