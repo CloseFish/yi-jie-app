@@ -118,31 +118,45 @@ const TVModal: React.FC<TVModalProps> = ({ isOpen, onClose }) => {
 						</Button>
 					</div>
 					<div className="w-full space-y-4">
-						<div className="w-full h-12 bg-[#C2DBC2] rounded-lg flex items-center px-4">
-							{volumeValue === 0 ? (
-								<i className="fas fa-volume-xmark text-[#2D5A27] text-xl mr-4"></i>
-							) : (
-								<i className="fas fa-volume-up text-[#2D5A27] text-xl mr-4"></i>
-							)}
-							<input
-								type="range"
-								min="0"
-								max="100"
-								value={volumeValue}
-								onChange={(e) => setVolumeValue(Number(e.target.value))}
-								className="flex-1 h-2 bg-[#2D5A27]/20 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#2D5A27] [&::-webkit-slider-thumb]:cursor-pointer"
-							/>
+						<div className="w-full h-12 bg-[#C2DBC2] rounded-lg flex items-center justify-between px-4">
+							<div>
+								{(() => {
+									if (volumeValue === 0) {
+										return <i className="fas fa-volume-xmark text-[#2D5A27] text-xl mr-4"></i>;
+									} else if (volumeValue >= 1 && volumeValue <= 50) {
+										return <i className="fas fa-volume-down text-[#2D5A27] text-xl mr-4"></i>;
+									} else {
+										return <i className="fas fa-volume-high text-[#2D5A27] text-xl mr-4"></i>;
+									}
+								})()}
+							</div>
+							{/* 为滑动条容器设置固定宽度 */}
+							<div className="w-[240px] h-2 bg-[#2D5A27]/20 rounded-full relative">
+								<input
+									type="range"
+									min="0"
+									max="100"
+									value={volumeValue}
+									onChange={(e) => setVolumeValue(Number(e.target.value))}
+									className="absolute inset-0 h-full w-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#2D5A27] [&::-webkit-slider-thumb]:cursor-pointer"
+								/>
+							</div>
 						</div>
-						<div className="w-full h-12 bg-[#C2DBC2] rounded-lg flex items-center px-4">
-							<i className="fas fa-sun text-[#2D5A27] text-xl mr-4"></i>
-							<input
-								type="range"
-								min="0"
-								max="100"
-								value={brightnessValue}
-								onChange={(e) => setBrightnessValue(Number(e.target.value))}
-								className="flex-1 h-2 bg-[#2D5A27]/20 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#2D5A27] [&::-webkit-slider-thumb]:cursor-pointer"
-							/>
+						<div className="w-full h-12 bg-[#C2DBC2] rounded-lg flex items-center justify-between px-4">
+							<div>
+								<i className="fas fa-sun text-[#2D5A27] text-xl mr-4"></i>
+							</div>
+							{/* 为滑动条容器设置固定宽度 */}
+							<div className="w-[240px] h-2 bg-[#2D5A27]/20 rounded-full relative">
+								<input
+									type="range"
+									min="0"
+									max="100"
+									value={brightnessValue}
+									onChange={(e) => setBrightnessValue(Number(e.target.value))}
+									className="absolute inset-0 h-full w-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#2D5A27] [&::-webkit-slider-thumb]:cursor-pointer"
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
