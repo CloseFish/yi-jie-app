@@ -149,9 +149,13 @@ const DevicePage: React.FC = () => {
 			<TVModal
 				isOpen={isTVModalOpen}
 				onClose={() => setIsTVModalOpen(false)}
-				toggleTV={() => toggleDevice("TV")} // 传递控制电视开关的函数
+				toggleTV={() => toggleDevice("TV")}
 			/>
-			<FridgeModal isOpen={isFridgeModalOpen} onClose={() => setIsFridgeModalOpen(false)} />
+			<FridgeModal
+				isOpen={isFridgeModalOpen}
+				onClose={() => setIsFridgeModalOpen(false)}
+				toggleFridge={() => toggleDevice("Fridge")}
+			/>
 			<LightModal isOpen={isLightModalOpen} onClose={() => setIsLightModalOpen(false)} />
 			<ThermostatModal isOpen={isThermostatModalOpen} onClose={() => setIsThermostatModalOpen(false)} />
 		</div>

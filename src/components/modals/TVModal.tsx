@@ -1,10 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Button from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
+import BaseModal from '../shared/BaseModal'; // 根据实际路径调整
 
 // 自定义钩子，用于管理音量和亮度状态并保存到 localStorage
 const useVolumeAndBrightness = () => {
@@ -28,60 +24,22 @@ const useVolumeAndBrightness = () => {
 	return { volumeValue, setVolumeValue, brightnessValue, setBrightnessValue };
 };
 
-// 自定义钩子，用于实现背景虚化和禁用除指定元素外的控件
-const useBackdropBlurAndDisableOutside = (isOpen: boolean, onClose: () => void) => {
-	const modalRef = useRef<HTMLDivElement>(null);
-
-	useEffect(() => {
-		const handleClickOutside = (event: MouseEvent) => {
-			if (isOpen && modalRef.current && !modalRef.current.contains(event.target as Node)) {
-				event.preventDefault();
-				event.stopPropagation();
-				onClose(); // 点击模态框外时调用关闭模态框的函数
-			}
-		};
-
-		if (isOpen) {
-			document.addEventListener('click', handleClickOutside, true);
-		}
-
-		return () => {
-			document.removeEventListener('click', handleClickOutside, true);
-		};
-	}, [isOpen, onClose]);
-
-	const backdrop = isOpen && (
-		<div className="fixed inset-0 bg-black opacity-50 z-40 backdrop-blur-sm" />
-	);
-
-	return { modalRef, backdrop };
-};
-
 interface TVModalProps {
 	isOpen: boolean;
 	onClose: () => void;
-	toggleTV: () => void; // 新增控制电视开关的函数
+	toggleTV: () => void;
 }
 
 const TVModal: React.FC<TVModalProps> = ({ isOpen, onClose, toggleTV }) => {
 	const { volumeValue, setVolumeValue, brightnessValue, setBrightnessValue } = useVolumeAndBrightness();
-	const { modalRef, backdrop } = useBackdropBlurAndDisableOutside(isOpen, onClose);
-
-	if (!isOpen) return null;
 
 	return (
-		<>
-			{backdrop}
-			<div
-				ref={modalRef}
-				id="tvModal"
-				className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#E0EBE0] p-6 rounded-lg shadow-xl z-50 w-[360px]"
-			>
+		<BaseModal isOpen={isOpen} onClose={onClose}>
+			<div id="tvModal" className="w-[360px]">
 				<div className="flex justify-between items-center mb-6">
 					<span className="text-lg font-medium">电视遥控器</span>
 					<Button className="w-12 h-12 rounded-full bg-red-500 hover:bg-red-600 text-white" onClick={() => {
-						toggleTV(); // 调用传递进来的函数控制电视开关
-						//onClose(); // 关闭模态框
+						toggleTV();
 					}}>
 						<i className="fas fa-power-off"></i>
 					</Button>
@@ -135,7 +93,6 @@ const TVModal: React.FC<TVModalProps> = ({ isOpen, onClose, toggleTV }) => {
 									}
 								})()}
 							</div>
-							{/* 为滑动条容器设置固定宽度 */}
 							<div className="w-[240px] h-2 bg-[#2D5A27]/20 rounded-full relative">
 								<input
 									type="range"
@@ -151,7 +108,6 @@ const TVModal: React.FC<TVModalProps> = ({ isOpen, onClose, toggleTV }) => {
 							<div>
 								<i className="fas fa-sun text-[#2D5A27] text-xl mr-4"></i>
 							</div>
-							{/* 为滑动条容器设置固定宽度 */}
 							<div className="w-[240px] h-2 bg-[#2D5A27]/20 rounded-full relative">
 								<input
 									type="range"
@@ -166,7 +122,7 @@ const TVModal: React.FC<TVModalProps> = ({ isOpen, onClose, toggleTV }) => {
 					</div>
 				</div>
 			</div>
-		</>
+		</BaseModal>
 	);
 };
 
