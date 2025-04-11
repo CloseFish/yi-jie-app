@@ -16,7 +16,10 @@ import {
 	faLock,
 } from "@fortawesome/free-solid-svg-icons";
 import DeviceControl from "@/components/device-controls/DeviceControl"; // 引入 DeviceControl 组件
-import TVModal from "../components/modals/TVModal"; // 引入 TVModal 组件
+import TVModal from "../components/modals/TVModal";
+import FridgeModal from "../components/modals/FridgeModal";
+import LightModal from "../components/modals/LightModal";
+import ThermostatModal from "../components/modals/ThermostatModal";
 
 const DevicePage: React.FC = () => {
 	// 从 localStorage 中读取设备状态
@@ -38,7 +41,11 @@ const DevicePage: React.FC = () => {
 		};
 
 	const [devices, setDevices] = useState(initialDevices);
-	const [isTVModalOpen, setIsTVModalOpen] = useState(false); // 管理电视模态框的显示状态
+	const [isTVModalOpen, setIsTVModalOpen] = useState(false);
+	const [isFridgeModalOpen, setIsFridgeModalOpen] = useState(false);
+	const [isLightModalOpen, setIsLightModalOpen] = useState(false);
+	const [isThermostatModalOpen, setIsThermostatModalOpen] = useState(false);
+
 
 	// 保存设备状态到 localStorage
 	useEffect(() => {
@@ -65,21 +72,21 @@ const DevicePage: React.FC = () => {
 						name="恒温器"
 						isChecked={devices.Thermostat}
 						onToggle={() => toggleDevice("Thermostat")}
-						onClick={() => console.log("Open Thermostat Modal")}
+						onClick={() => setIsThermostatModalOpen(true)}
 					/>
 					<DeviceControl
 						icon={faTv}
 						name="电视"
 						isChecked={devices.TV}
 						onToggle={() => toggleDevice("TV")}
-						onClick={() => setIsTVModalOpen(true)} // 点击电视设备时打开模态框
+						onClick={() => setIsTVModalOpen(true)}
 					/>
 					<DeviceControl
 						icon={faLightbulb}
 						name="灯光"
 						isChecked={devices.Light}
 						onToggle={() => toggleDevice("Light")}
-						onClick={() => console.log("Open Light Modal")}
+						onClick={() => setIsLightModalOpen(true)}
 					/>
 					<DeviceControl
 						icon={faVolumeUp}
@@ -93,7 +100,7 @@ const DevicePage: React.FC = () => {
 						name="冰箱"
 						isChecked={devices.Fridge}
 						onToggle={() => toggleDevice("Fridge")}
-						onClick={() => console.log("Open Fridge Modal")}
+						onClick={() => setIsFridgeModalOpen(true)}
 					/>
 					<DeviceControl
 						icon={faTemperatureHigh}
@@ -139,7 +146,10 @@ const DevicePage: React.FC = () => {
 					/>
 				</div>
 			</div>
-			<TVModal isOpen={isTVModalOpen} onClose={() => setIsTVModalOpen(false)} /> {/* 渲染电视模态框 */}
+			<TVModal isOpen={isTVModalOpen} onClose={() => setIsTVModalOpen(false)} />
+			<FridgeModal isOpen={isFridgeModalOpen} onClose={() => setIsFridgeModalOpen(false)} />
+			<LightModal isOpen={isLightModalOpen} onClose={() => setIsLightModalOpen(false)} />
+			<ThermostatModal isOpen={isThermostatModalOpen} onClose={() => setIsThermostatModalOpen(false)} />
 		</div>
 	);
 };
