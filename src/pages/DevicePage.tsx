@@ -16,15 +16,15 @@ import {
 	faFan,
 	faLock,
 } from "@fortawesome/free-solid-svg-icons";
-import DeviceControl from "@/components/device-controls/DeviceControl"; // 引入 DeviceControl 组件
+import DeviceControl from "@/components/device-controls/DeviceControl";
 import TVModal from "../components/modals/TVModal";
 import FridgeModal from "../components/modals/FridgeModal";
 import LightModal from "../components/modals/LightModal";
 import ThermostatModal from "../components/modals/ThermostatModal";
-import MusicPlayerModal from "../components/modals/MusicPlayerModal"; // 引入智能音箱模态框组件
+import MusicPlayerModal from "../components/modals/MusicPlayerModal";
+import SmartLockModal from "../components/modals/SmartLockModal";
 
 const DevicePage: React.FC = () => {
-	// 从 localStorage 中读取设备状态
 	const storedDevices = localStorage.getItem("devicesStatus");
 	const initialDevices = storedDevices
 		? JSON.parse(storedDevices)
@@ -47,9 +47,9 @@ const DevicePage: React.FC = () => {
 	const [isFridgeModalOpen, setIsFridgeModalOpen] = useState(false);
 	const [isLightModalOpen, setIsLightModalOpen] = useState(false);
 	const [isThermostatModalOpen, setIsThermostatModalOpen] = useState(false);
-	const [isSpeakerModalOpen, setIsSpeakerModalOpen] = useState(false); // 添加智能音箱模态框显示状态
+	const [isSpeakerModalOpen, setIsSpeakerModalOpen] = useState(false);
+	const [isSmartLockModalOpen, setIsSmartLockModalOpen] = useState(false);
 
-	// 保存设备状态到 localStorage
 	useEffect(() => {
 		localStorage.setItem("devicesStatus", JSON.stringify(devices));
 	}, [devices]);
@@ -98,7 +98,7 @@ const DevicePage: React.FC = () => {
 						name="智能音响"
 						isChecked={devices.Speaker}
 						onToggle={() => toggleDevice("Speaker")}
-						onClick={() => setIsSpeakerModalOpen(true)} // 点击打开智能音箱模态框
+						onClick={() => setIsSpeakerModalOpen(true)}
 					/>
 					<DeviceControl
 						icon={faBox}
@@ -147,7 +147,7 @@ const DevicePage: React.FC = () => {
 						name="智能门锁"
 						isChecked={devices.SmartLock}
 						onToggle={() => toggleDevice("SmartLock")}
-						onClick={() => console.log("Open Smart Lock Modal")}
+						onClick={() => setIsSmartLockModalOpen(true)}
 					/>
 				</div>
 			</div>
@@ -178,6 +178,12 @@ const DevicePage: React.FC = () => {
 				setShowMusicDialog={setIsSpeakerModalOpen}
 				isSpeakerOn={devices.Speaker}
 				toggleSpeaker={() => toggleDevice("Speaker")}
+			/>
+			<SmartLockModal
+				showLockDialog={isSmartLockModalOpen}
+				setShowLockDialog={setIsSmartLockModalOpen}
+				isSmartLockOn={devices.SmartLock}
+				toggleSmartLock={() => toggleDevice("SmartLock")}
 			/>
 		</div>
 	);
