@@ -19,7 +19,7 @@ const Button: React.FC<ButtonProps> = ({ variant = 'default', className, onClick
       ? 'border border-gray-300 bg-transparent text-gray-700 hover:bg-gray-100'
       : variant === 'secondary'
         ? 'bg-green-500 text-white' // 定义 secondary 变体的样式
-        : 'bg-blue-500 text-white';
+        : 'bg-[#2D5A27] text-white'; // 将默认背景色改为 #2D5A27
 
   const sizeClass = size === 'small'
     ? 'text-sm px-2 py-1'

@@ -223,7 +223,7 @@ const MyHomePage: React.FC = () => {
 					/>
 					<DeviceControl
 						icon={faLightbulb}
-						name="电灯"
+						name="灯光"
 						isChecked={devices.Light}
 						onToggle={() => toggleDevice("Light")}
 						onClick={() => setIsLightModalOpen(true)}
