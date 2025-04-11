@@ -1,3 +1,4 @@
+//DevicePage.tsx
 "use client";
 import React, { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
@@ -52,8 +53,11 @@ const DevicePage: React.FC = () => {
 		localStorage.setItem("devicesStatus", JSON.stringify(devices));
 	}, [devices]);
 
-	const toggleDevice = (deviceName: string) => {
-		const updatedDevices = { ...devices, [deviceName]: !devices[deviceName] };
+	const toggleDevice = (deviceName: string, newValue?: boolean) => {
+		const updatedDevices = {
+			...devices,
+			[deviceName]: newValue !== undefined ? newValue : !devices[deviceName]
+		};
 		setDevices(updatedDevices);
 		try {
 			localStorage.setItem("devicesStatus", JSON.stringify(updatedDevices));
@@ -156,7 +160,12 @@ const DevicePage: React.FC = () => {
 				onClose={() => setIsFridgeModalOpen(false)}
 				toggleFridge={() => toggleDevice("Fridge")}
 			/>
-			<LightModal isOpen={isLightModalOpen} onClose={() => setIsLightModalOpen(false)} />
+			<LightModal
+				isOpen={isLightModalOpen}
+				onClose={() => setIsLightModalOpen(false)}
+				isLightOn={devices.Light}
+				setIsLightOn={(value) => toggleDevice("Light", value)}
+			/>
 			<ThermostatModal isOpen={isThermostatModalOpen} onClose={() => setIsThermostatModalOpen(false)} />
 		</div>
 	);
