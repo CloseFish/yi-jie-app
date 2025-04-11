@@ -1,3 +1,4 @@
+// 以 MyHomePage 为例
 "use client"
 
 import React, { useState } from "react";
@@ -265,6 +266,8 @@ const MyHomePage: React.FC = () => {
 				<ThermostatModal
 					isOpen={isThermostatModalOpen}
 					onClose={() => setIsThermostatModalOpen(false)}
+					isThermostatOn={devices.Thermostat}
+					toggleThermostat={() => toggleDevice("Thermostat")}
 				/>
 			</main>
 		</div>

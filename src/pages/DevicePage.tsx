@@ -76,7 +76,7 @@ const DevicePage: React.FC = () => {
 						name="恒温器"
 						isChecked={devices.Thermostat}
 						onToggle={() => toggleDevice("Thermostat")}
-						onClick={() => setIsTVModalOpen(true)}
+						onClick={() => setIsThermostatModalOpen(true)} // 修正为打开恒温器模态框
 					/>
 					<DeviceControl
 						icon={faTv}
@@ -166,7 +166,12 @@ const DevicePage: React.FC = () => {
 				isLightOn={devices.Light}
 				setIsLightOn={(value) => toggleDevice("Light", value)}
 			/>
-			<ThermostatModal isOpen={isThermostatModalOpen} onClose={() => setIsThermostatModalOpen(false)} />
+			<ThermostatModal
+				isOpen={isThermostatModalOpen}
+				onClose={() => setIsThermostatModalOpen(false)}
+				isThermostatOn={devices.Thermostat}
+				toggleThermostat={() => toggleDevice("Thermostat")}
+			/>
 		</div>
 	);
 };
