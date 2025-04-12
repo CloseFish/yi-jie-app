@@ -1,4 +1,4 @@
-//DevicePage.tsx
+// DevicePage.tsx
 "use client";
 import React, { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
@@ -23,6 +23,7 @@ import LightModal from "../components/modals/LightModal";
 import ThermostatModal from "../components/modals/ThermostatModal";
 import MusicPlayerModal from "../components/modals/MusicPlayerModal";
 import SmartLockModal from "../components/modals/SmartLockModal";
+import CurtainModal from "../components/modals/CurtainModal"; // 引入窗帘模块
 
 const DevicePage: React.FC = () => {
 	const storedDevices = localStorage.getItem("devicesStatus");
@@ -49,6 +50,7 @@ const DevicePage: React.FC = () => {
 	const [isThermostatModalOpen, setIsThermostatModalOpen] = useState(false);
 	const [isSpeakerModalOpen, setIsSpeakerModalOpen] = useState(false);
 	const [isSmartLockModalOpen, setIsSmartLockModalOpen] = useState(false);
+	const [isCurtainModalOpen, setIsCurtainModalOpen] = useState(false); // 添加窗帘模态框状态
 
 	useEffect(() => {
 		localStorage.setItem("devicesStatus", JSON.stringify(devices));
@@ -119,7 +121,7 @@ const DevicePage: React.FC = () => {
 						name="窗帘"
 						isChecked={devices.Curtains}
 						onToggle={() => toggleDevice("Curtains")}
-						onClick={() => console.log("Open Curtains Modal")}
+						onClick={() => setIsCurtainModalOpen(true)} // 点击时打开窗帘模态框
 					/>
 					<DeviceControl
 						icon={faUtensils}
@@ -185,8 +187,13 @@ const DevicePage: React.FC = () => {
 				isSmartLockOn={devices.SmartLock}
 				toggleSmartLock={() => toggleDevice("SmartLock")}
 			/>
+			<CurtainModal
+				isOpen={isCurtainModalOpen}
+				onClose={() => setIsCurtainModalOpen(false)}
+				toggleCurtain={() => toggleDevice("Curtains")}
+				isCurtainOpen={devices.Curtains} // 传递当前窗帘状态
+			/>
 		</div>
 	);
 };
-
 export default DevicePage;
