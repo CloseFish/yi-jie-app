@@ -32,12 +32,26 @@ const YijieMainPage: React.FC = () => {
 	};
 
 	return (
-		<div className="bg-gradient-to-tr from-blue-100 via-white to-blue-100 min-h-screen p-6">
-			<div className="flex h-screen relative">
+		<div className="bg-gradient-to-tr from-blue-100 via-white to-blue-100 h-screen p-6">
+			<style>
+				{`
+                    @font-face {
+                        font-family: 'DingTalkProgress';
+                        src: url('/fonts/钉钉进步体.ttf') format('truetype');
+                        font-weight: normal;
+                        font-style: normal;
+                    }
+                `}
+			</style>
+			<div className="flex h-full relative justify-center items-center">
 				{/* 左侧导航栏 */}
 				<div className="fixed left-6 top-1/2 -translate-y-1/2 w-[100px] bg-white shadow-lg flex flex-col items-center py-8 rounded-2xl space-y-6">
 					<div className="w-16 h-16 bg-blue-500 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
-						<span className="text-white text-4xl font-bold">翌</span>
+						<img
+							src="/icons/yijie_logo.svg"
+							alt="翌界 logo"
+							className="w-full h-full object-contain"
+						/>
 					</div>
 					<div className="relative">
 						<Popover>
@@ -156,22 +170,26 @@ const YijieMainPage: React.FC = () => {
 					</div>
 				</div>
 				{/* 主体内容区 */}
-				<div className="flex-1 flex flex-col pl-20 h-screen">
+				<div className="flex-1 flex flex-col pl-20 h-full">
 					<div className="text-center mb-12 mt-20">
 						<h1
-							className="text-[100px] font-bold mb-6 bg-gradient-to-b from-blue-500 to-blue-700 bg-clip-text text-transparent"
+							className="text-[60px] font-bold mb-6"
 							style={{
-								fontFamily: "'幼圆', sans-serif",
+								fontFamily: 'DingTalkProgress, sans-serif',
 								textShadow: '0 2px 4px rgba(0,0,0,0.1)',
-								letterSpacing: '4px'
+								letterSpacing: '4px',
+								background: 'linear-gradient(to bottom, rgba(22, 124, 255, 1), rgba(92, 169, 255, 0.6))',
+								WebkitBackgroundClip: 'text',
+								backgroundClip: 'text',
+								WebkitTextFillColor: 'transparent'
 							}}
 						>
 							翌 界
 						</h1>
-						<p className="text-gray-600 mb-12 text-3xl">{greeting}</p>
-						<div className="flex flex-col items-center justify-center flex-1 pb-6">
-							<div className="w-3/4 bg-blue-200/50 rounded-t-3xl p-8 shadow-[0_0_30px_rgba(59,130,246,0.3)] border border-blue-300">
-								<div className="flex gap-4 mb-[280px]">
+						<p className="text-gray-600 mb-12 text-2xl">{greeting}</p>
+						<div className="flex flex-col items-center justify-center h-full pb-6">
+							<div className="w-3/4 bg-blue-200/50 rounded-t-3xl p-8 shadow-[0_0_30px_rgba(59,130,246,0.3)] border border-blue-300 h-full overflow-auto flex flex-col justify-between">
+								<div className="flex gap-4 mb-[100px]">
 									<Avatar className="w-12 h-12">
 										<img
 											src="https://ai-public.mastergo.com/ai/img_res/40498f8a432cce37978cd3df80f9db7e.jpg"
@@ -179,54 +197,64 @@ const YijieMainPage: React.FC = () => {
 										/>
 									</Avatar>
 									<div className="bg-white rounded-2xl p-6 flex-1 shadow-sm">
-										<p className="text-2xl">
-											你好！我是翌界 AI
-											助手，请告诉我你想要的界面设计风格，我会为你生成完美的用户界面。
+										<p className="text-xl text-left">
+											你好！我是翌界 AI 助手，请告诉我你想要的界面设计风格，我会为你生成完美的用户界面。
 										</p>
 									</div>
 								</div>
-								<div className="relative mb-8">
-									<Input
-										className="bg-white text-4xl py-10 rounded-xl border-2 border-gray-100"
-										placeholder="请输入你想要的界面设计风格..."
-										type="text"
-									/>
-									<Button className="!rounded-xl whitespace-nowrap bg-blue-500 hover:bg-blue-600 text-white absolute right-2 top-1/2 -translate-y-1/2 py-8 px-10 text-2xl">
-										<i className="fas fa-paper-plane mr-2"></i>
-										发送
-									</Button>
-								</div>
-								<div className="flex gap-4 justify-center flex-wrap">
-									<Button
-										variant="outline"
-										className="bg-white/80 hover:bg-blue-50 rounded-xl py-8 px-12 text-2xl"
-									>
-										现代简约风格
-									</Button>
-									<Button
-										variant="outline"
-										className="bg-white/80 hover:bg-blue-50 rounded-xl py-8 px-12 text-2xl"
-									>
-										科技感设计
-									</Button>
-									<Button
-										variant="outline"
-										className="bg-white/80 hover:bg-blue-50 rounded-xl py-8 px-12 text-2xl"
-									>
-										明亮清新布局
-									</Button>
-									<Button
-										variant="outline"
-										className="bg-white/80 hover:bg-blue-50 rounded-xl py-8 px-12 text-2xl"
-									>
-										深色主题界面
-									</Button>
-									<Button
-										variant="outline"
-										className="bg-white/80 hover:bg-blue-50 rounded-xl py-8 px-12 text-2xl"
-									>
-										色调温和协调
-									</Button>
+								<div>
+									<div className="relative mb-8">
+										<Input
+											className="bg-white text-2xl py-6 rounded-xl border-2 border-gray-100 w-full pr-28"
+											placeholder="请输入你想要的界面设计风格..."
+											type="text"
+										/>
+										<Button
+											className="!rounded-xl whitespace-nowrap bg-blue-500 hover:bg-blue-600 text-white absolute right-2 top-1/2 -translate-y-1/2 py-4 px-8 text-xl"
+											style={{
+												top: '50%',
+												//	transform: 'translateY(-50%)',
+												bottom: 'auto',
+												height: 'calc(100% - 16px)'
+												//	margin: '8px'
+											}}
+										>
+											<i className="fas fa-paper-plane mr-2"></i>
+											发送
+										</Button>
+									</div>
+									<div className="flex gap-4 justify-center flex-wrap">
+										<Button
+											variant="outline"
+											className="bg-white/80 hover:bg-blue-50 rounded-xl py-6 px-10 text-xl"
+										>
+											现代简约风格
+										</Button>
+										<Button
+											variant="outline"
+											className="bg-white/80 hover:bg-blue-50 rounded-xl py-6 px-10 text-xl"
+										>
+											科技感设计
+										</Button>
+										<Button
+											variant="outline"
+											className="bg-white/80 hover:bg-blue-50 rounded-xl py-6 px-10 text-xl"
+										>
+											明亮清新布局
+										</Button>
+										<Button
+											variant="outline"
+											className="bg-white/80 hover:bg-blue-50 rounded-xl py-6 px-10 text-xl"
+										>
+											深色主题界面
+										</Button>
+										<Button
+											variant="outline"
+											className="bg-white/80 hover:bg-blue-50 rounded-xl py-6 px-10 text-xl"
+										>
+											色调温和协调
+										</Button>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -237,4 +265,4 @@ const YijieMainPage: React.FC = () => {
 	);
 };
 
-export default YijieMainPage;
+export default YijieMainPage;    
