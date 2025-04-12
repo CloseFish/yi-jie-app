@@ -4,12 +4,12 @@ import Button from '../ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 interface SidebarProps {
-	currentPage: 'home' | 'devices' | 'analysis' | 'history' | 'settings' | 'login';
-	setCurrentPage: React.Dispatch<React.SetStateAction<'home' | 'devices' | 'analysis' | 'history' | 'settings' | 'login'>>;
+	currentPage: 'home' | 'devices' | 'analysis' | 'history' | 'settings' | 'login' | 'smart';
+	setCurrentPage: React.Dispatch<React.SetStateAction<'home' | 'devices' | 'analysis' | 'history' | 'settings' | 'login' | 'smart'>>;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ currentPage, setCurrentPage }) => {
-	const handlePageChange = (page: 'home' | 'devices' | 'analysis' | 'history' | 'settings' | 'login') => {
+	const handlePageChange = (page: 'home' | 'devices' | 'analysis' | 'history' | 'settings' | 'login' | 'smart') => {
 		// 只有在页面已实现时才切换页面
 		if (['home', 'devices', 'analysis'].includes(page)) {
 			setCurrentPage(page);

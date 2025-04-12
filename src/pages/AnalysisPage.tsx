@@ -15,7 +15,7 @@ interface SelectTriggerProps {
 	onClick?: () => void;
 }
 
-const App: React.FC = () => {
+const AnalysisPage: React.FC = () => {
 	const chartRef = useRef<HTMLDivElement>(null);
 	const [selectedValue, setSelectedValue] = useState('thisMonth'); // 用于存储选中的值
 	const [isOpen, setIsOpen] = useState(false); // 用于控制下拉内容的显示状态
@@ -316,4 +316,4 @@ const App: React.FC = () => {
 	);
 };
 
-export default App;
+export default AnalysisPage;

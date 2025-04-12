@@ -1,10 +1,9 @@
-// components/shared/Header.tsx
 import React from 'react';
 import Button from '../ui/button';
 
 interface HeaderProps {
-	currentPage: 'home' | 'devices' | 'analysis' | 'history' | 'settings' | 'login';
-	setCurrentPage: React.Dispatch<React.SetStateAction<'home' | 'devices' | 'analysis' | 'history' | 'settings' | 'login'>>;
+	currentPage: 'home' | 'devices' | 'analysis' | 'history' | 'settings' | 'login' | 'smart'; // 新增smart类型
+	setCurrentPage: React.Dispatch<React.SetStateAction<'home' | 'devices' | 'analysis' | 'history' | 'settings' | 'login' | 'smart'>>; // 新增smart类型
 }
 
 const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
@@ -41,10 +40,17 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
 					>
 						登录
 					</Button>
+					<Button
+						variant="ghost"
+						className={`text-lg py-4 ${currentPage === 'smart' ? 'text-blue-400' : 'text-gray-600'}`}
+						onClick={() => setCurrentPage('smart')}
+					>
+						SmartHome登录
+					</Button>
 				</div>
 			</div>
 			{/* 第二行：图标和文字，仅在非登录页面显示 */}
-			{currentPage !== 'login' && (
+			{currentPage !== 'login' && currentPage !== 'smart' && (
 				<div className="flex justify-between w-full mt-4">
 					<div className="flex items-center space-x-2">
 						<span className="text-xl font-bold">SmartHome</span>
