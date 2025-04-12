@@ -45,7 +45,7 @@ const YijieMainPage: React.FC = () => {
 			</style>
 			<div className="flex h-full relative justify-center items-center">
 				{/* 左侧导航栏 */}
-				<div className="fixed left-6 top-1/2 -translate-y-1/2 w-[100px] bg-white shadow-lg flex flex-col items-center py-8 rounded-2xl space-y-6">
+				<div className="fixed left-6 top-1/2 -translate-y-1/2 w-[100px] bg-white shadow-lg flex flex-col items-center py-8 rounded-2xl space-y-8">
 					<div className="w-16 h-16 bg-blue-500 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
 						<img
 							src="/icons/yijie_logo.svg"
@@ -68,35 +68,35 @@ const YijieMainPage: React.FC = () => {
 								<div className="space-y-2">
 									<Button
 										variant="ghost"
-										className="w-full justify-start gap-2"
+										className="w-full justify-start gap-2 text-sm"
 									>
 										<i className="fas fa-user text-gray-600"></i>
 										用户信息
 									</Button>
 									<Button
 										variant="ghost"
-										className="w-full justify-start gap-2"
+										className="w-full justify-start gap-2 text-sm"
 									>
 										<i className="fas fa-palette text-gray-600"></i>
 										界面主题
 									</Button>
 									<Button
 										variant="ghost"
-										className="w-full justify-start gap-2"
+										className="w-full justify-start gap-2 text-sm"
 									>
 										<i className="fas fa-language text-gray-600"></i>
 										语言选择
 									</Button>
 									<Button
 										variant="ghost"
-										className="w-full justify-start gap-2"
+										className="w-full justify-start gap-2 text-sm"
 									>
 										<i className="fas fa-comment-dots text-gray-600"></i>
 										用户反馈
 									</Button>
 									<Button
 										variant="ghost"
-										className="w-full justify-start gap-2"
+										className="w-full justify-start gap-2 text-sm"
 									>
 										<i className="fas fa-sign-out-alt text-gray-600"></i>
 										退出登录
@@ -105,61 +105,59 @@ const YijieMainPage: React.FC = () => {
 							</PopoverContent>
 						</Popover>
 					</div>
-					<div className="flex-1 flex flex-col gap-3">
+					<div className="flex-1 flex flex-col gap-6 justify-center">
 						<TooltipProvider>
 							<Tooltip content="添加新会话">
 								<TooltipTrigger>
 									<Button
 										variant="ghost"
 										size="icon"
-										className="!rounded-button hover:bg-blue-50 w-16 h-16"
+										className="!rounded-button hover:bg-blue-50 w-16 h-16 flex items-center justify-center"
 									>
 										<i className="fas fa-plus text-gray-600 text-3xl"></i>
 									</Button>
 								</TooltipTrigger>
-								<TooltipContent> {/* 移除 className 属性 */}
-									添加新会话
-								</TooltipContent>
 							</Tooltip>
 							<Tooltip content="历史记录">
 								<TooltipTrigger>
 									<Button
 										variant="ghost"
 										size="icon"
-										className="!rounded-button hover:bg-blue-50 w-16 h-16"
+										className="!rounded-button hover:bg-blue-50 w-16 h-16 flex items-center justify-center"
 									>
 										<i className="fas fa-history text-gray-600 text-3xl"></i>
 									</Button>
 								</TooltipTrigger>
-								<TooltipContent> {/* 移除 className 属性 */}
-									历史记录
-								</TooltipContent>
 							</Tooltip>
 						</TooltipProvider>
 					</div>
 					<div className="mt-auto">
 						<Popover>
 							<PopoverTrigger isOpen={false} togglePopover={() => { }}>
-								<Button
-									variant="ghost"
-									size="icon"
-									className="!rounded-button hover:bg-blue-50 w-20 h-20"
-								>
-									<i className="fas fa-download text-gray-600 text-3xl"></i>
-								</Button>
+								<Tooltip content="下载">
+									<TooltipTrigger>
+										<Button
+											variant="ghost"
+											size="icon"
+											className="!rounded-button hover:bg-blue-50 w-16 h-16 flex items-center justify-center"
+										>
+											<i className="fas fa-download text-gray-600 text-3xl"></i>
+										</Button>
+									</TooltipTrigger>
+								</Tooltip>
 							</PopoverTrigger>
 							<PopoverContent isOpen={false}>
 								<div className="space-y-2">
 									<Button
 										variant="ghost"
-										className="w-full justify-start gap-2"
+										className="w-full justify-start gap-2 text-sm"
 									>
 										<i className="fas fa-desktop text-gray-600"></i>
 										下载桌面端
 									</Button>
 									<Button
 										variant="ghost"
-										className="w-full justify-start gap-2"
+										className="w-full justify-start gap-2 text-sm"
 									>
 										<i className="fas fa-puzzle-piece text-gray-600"></i>
 										添加浏览器插件
@@ -265,4 +263,4 @@ const YijieMainPage: React.FC = () => {
 	);
 };
 
-export default YijieMainPage;    
+export default YijieMainPage;
